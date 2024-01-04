@@ -4,7 +4,7 @@ on:
        branches:
          - main
 
-name: Quarto Publish
+name: Quarto Render
 
 jobs:
   build-deploy:
@@ -37,10 +37,16 @@ jobs:
       #- name: Install remote packages
       #  run: |
       #   Rscript -e 'remotes::install_github("DevPsyLab/petersenlab")'
-    
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
+
+      - name: Render Quarto Project
+        uses: quarto-dev/quarto-actions/render@v2
         with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          to: html # If set, it will be equivalent to `quarto render --to html`
+      
+      - name: Commit to GitHub
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git add . -f
+          git commit -m 'Re-build wiki' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
