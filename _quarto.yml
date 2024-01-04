@@ -7,14 +7,16 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
       - text: Links
         menu:
         - text: Lab Wiki
           href: https://devpsylab.github.io/LabWiki/
         - text: Data Analysis Guides
           href: https://devpsylab.github.io/DataAnalysis
+      - about.qmd
     right:
+    - text: "Lab Wiki"
+      href: https://devpsylab.github.io/LabWiki
     - text: "Lab Website"
       href: https://developmental-psychopathology.lab.uiowa.edu
 
